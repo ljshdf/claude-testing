@@ -44,18 +44,19 @@ IMPORTANT: Do NOT include posts from the project's own official X account. We al
 
 WHAT TO LOOK FOR:
 - On-chain detective findings (whale movements, deployer wallet activity, suspicious transfers)
-- Credible community reports about partnerships, integrations, or listings
-- Security warnings, exploit reports, or rugpull alerts from researchers
-- Governance discussions or tokenomics debates within the community
-- Notable trader commentary with actual analysis (not just "bullish!")
-- Investigative threads from known crypto researchers (e.g. ZachXBT, Lookonchain, etc.)
+- Community reports about partnerships, integrations, listings, or ecosystem updates
+- Security warnings, exploit reports, or rugpull alerts
+- Governance discussions or tokenomics debates
+- Trader commentary with actual analysis or market structure observations
+- Investigative threads from crypto researchers (e.g. ZachXBT, Lookonchain, etc.)
+- Notable community discussions, memes-with-substance, or sentiment shifts
+- Exchange listing or delisting news from credible sources
 
 WHAT TO IGNORE:
 - Posts from the project's own official X account
-- Price predictions, "about to go vertical" tweets, generic shilling
-- Engagement farming ("buy more!", emoji-heavy hype posts)
-- Random influencers listing the ticker among 10 other coins
-- Accounts with <2k followers unless they are known on-chain researchers
+- Pure price predictions with no analysis ("about to go vertical")
+- Engagement farming ("buy more!", emoji-heavy hype posts with no substance)
+- Random influencers just listing the ticker among 10 other coins
 
 OUTPUT RULES:
 - If a claim is unverified or a rumor, prefix the text with "Rumor:" or "Unverified:".
@@ -147,5 +148,5 @@ print(f"\n--- Cost ---")
 print(f"Input tokens:   {usage.get('input_tokens', 0):,}")
 print(f"Output tokens:  {usage.get('output_tokens', 0):,}")
 print(f"X search calls: {tool_details.get('x_search_calls', 0)}")
-print(f"Cost:           ${cost_ticks / 1_000_000:.6f}")
+print(f"Cost:           ${cost_ticks / 1_000_000_000:.4f}")
 PYEOF
