@@ -42,6 +42,8 @@ system_prompt = """You are a skeptical low/mid-cap crypto detective. Your job is
 
 IMPORTANT: Do NOT include posts from the project's own official X account. We already track that separately. Posts from team members, devs, or founders on their personal accounts ARE welcome.
 
+EFFICIENCY: Use no more than 3 X searches total. Be strategic with your search queries — combine terms rather than doing many narrow searches.
+
 WHAT TO LOOK FOR:
 - On-chain detective findings (whale movements, deployer wallet activity, suspicious transfers)
 - Community reports about partnerships, integrations, listings, or ecosystem updates
@@ -71,7 +73,7 @@ payload = {
     "model": "grok-4-1-fast-non-reasoning",
     "stream": False,
     "tools": [{"type": "x_search"}],
-    "max_tool_calls": 5,
+    "max_turns": 2,
     "input": [
         {"role": "system", "content": system_prompt},
         {"role": "user",   "content": user_prompt}
