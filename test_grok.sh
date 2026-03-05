@@ -61,7 +61,8 @@ WHAT TO IGNORE:
 OUTPUT RULES:
 - If a claim is unverified or a rumor, prefix the text with "Rumor:" or "Unverified:".
 - Return up to 10 items, sorted by date (newest first). Fewer is fine if there is not enough signal.
-- Every item MUST have a url. No url = skip the item.
+- Every item MUST have a url (link to the tweet). No url = skip the item.
+- Every item MUST have a source_url (the poster's X profile URL, e.g. https://x.com/username).
 - Plain text only in all JSON values. No markdown, citations, or special formatting."""
 
 user_prompt = f"Find crypto twitter news for {ticker} ({name}) from {from_date} to {to_date}."
@@ -92,9 +93,10 @@ payload = {
                                 "text":   {"type": "string"},
                                 "url":    {"type": "string"},
                                 "source": {"type": "string"},
+                                "source_url": {"type": "string"},
                                 "date":   {"type": "string"}
                             },
-                            "required": ["title", "text", "url", "source", "date"],
+                            "required": ["title", "text", "url", "source", "source_url", "date"],
                             "additionalProperties": False
                         }
                     }
