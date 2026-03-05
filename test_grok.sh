@@ -73,7 +73,7 @@ payload = {
     "model": "grok-4-1-fast-non-reasoning",
     "stream": False,
     "tools": [{"type": "x_search"}],
-    "max_turns": 2,
+    "max_turns": 3,
     "input": [
         {"role": "system", "content": system_prompt},
         {"role": "user",   "content": user_prompt}
@@ -115,7 +115,7 @@ result = subprocess.run(
      "-H", f"Authorization: Bearer {api_key}",
      "-H", "Content-Type: application/json",
      "-d", json.dumps(payload)],
-    capture_output=True, text=True, timeout=120
+    capture_output=True, text=True, timeout=300
 )
 
 if result.returncode != 0:
