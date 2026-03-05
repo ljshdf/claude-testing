@@ -8,18 +8,23 @@
 
 set -euo pipefail
 
+# Source .env if present
+if [ -f .env ]; then
+    set -a; source .env; set +a
+fi
+
 # ─────────────────────────────────────────
 # CONFIG
 # ─────────────────────────────────────────
-TOKEN_TICKER='$WIF'
-TOKEN_NAME='dogwifhat'
-DAYS_BACK=7
+export TOKEN_TICKER='$WIF'
+export TOKEN_NAME='dogwifhat'
+export DAYS_BACK=7
 
 # ─────────────────────────────────────────
 
 python3 << 'PYEOF'
 import json, os, subprocess, sys
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 ticker = os.environ.get("TOKEN_TICKER", "$WIF")
 name   = os.environ.get("TOKEN_NAME", "dogwifhat")
@@ -30,8 +35,8 @@ if not api_key:
     print("ERROR: XAI_API_KEY not set", file=sys.stderr)
     sys.exit(1)
 
-to_date   = datetime.utcnow().strftime("%Y-%m-%d")
-from_date = (datetime.utcnow() - timedelta(days=days)).strftime("%Y-%m-%d")
+to_date   = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+from_date = (datetime.now(timezone.utc) - timedelta(days=days)).strftime("%Y-%m-%d")
 
 system_prompt = """You are a skeptical low/mid-cap crypto detective. Your job is to scan crypto Twitter for community-sourced intel about a given project — not hype, shills, or engagement farming.
 
@@ -64,7 +69,7 @@ payload = {
     "model": "grok-4-1-fast-non-reasoning",
     "stream": False,
     "tools": [{"type": "x_search"}],
-    "max_tool_calls": 3,
+    "max_tool_calls": 5,
     "input": [
         {"role": "system", "content": system_prompt},
         {"role": "user",   "content": user_prompt}
@@ -72,6 +77,7 @@ payload = {
     "text": {
         "format": {
             "type": "json_schema",
+            "name": "crypto_news",
             "strict": True,
             "schema": {
                 "type": "object",
@@ -107,6 +113,14 @@ result = subprocess.run(
     capture_output=True, text=True, timeout=120
 )
 
+if result.returncode != 0:
+    print(f"curl failed (exit {result.returncode}): {result.stderr}", file=sys.stderr)
+    sys.exit(1)
+
+if not result.stdout.strip():
+    print("Empty response from API", file=sys.stderr)
+    sys.exit(1)
+
 try:
     resp = json.loads(result.stdout)
 except json.JSONDecodeError:
@@ -133,5 +147,5 @@ print(f"\n--- Cost ---")
 print(f"Input tokens:   {usage.get('input_tokens', 0):,}")
 print(f"Output tokens:  {usage.get('output_tokens', 0):,}")
 print(f"X search calls: {tool_details.get('x_search_calls', 0)}")
-print(f"Cost:           ${cost_ticks / 1_000_000_000:.4f}")
+print(f"Cost:           ${cost_ticks / 1_000_000:.6f}")
 PYEOF
