@@ -52,12 +52,6 @@ WHAT TO IGNORE:
 - Random influencers listing the ticker among 10 other coins
 - Accounts with <2k followers unless they are known on-chain researchers
 
-SEARCH STRATEGY:
-- Use exactly 2 x_search calls. No more.
-- Call 1: broad search for the token ticker OR project name — focus on community discussion, on-chain analysis, and third-party reports.
-- Call 2: search for known crypto researchers, on-chain analysts, or high-signal accounts discussing the token.
-- Set limit to 10 on each call.
-
 OUTPUT RULES:
 - If a claim is unverified or a rumor, prefix the text with "Rumor:" or "Unverified:".
 - Return up to 10 items, sorted by date (newest first). Fewer is fine if there is not enough signal.
