@@ -16,8 +16,8 @@ fi
 # ─────────────────────────────────────────
 # CONFIG
 # ─────────────────────────────────────────
-export TOKEN_TICKER='$WIF'
-export TOKEN_NAME='dogwifhat'
+export TOKEN_TICKER='$AVICI'
+export TOKEN_NAME='AVICI'
 export DAYS_BACK=7
 
 # ─────────────────────────────────────────
