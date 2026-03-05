@@ -47,14 +47,14 @@ WHAT TO LOOK FOR:
 - Community reports about partnerships, integrations, listings, or ecosystem updates
 - Security warnings, exploit reports, or rugpull alerts
 - Governance discussions or tokenomics debates
-- Trader commentary with actual analysis or market structure observations
+- Trader commentary about market structure, liquidity, or positioning (NOT price targets)
 - Investigative threads from crypto researchers (e.g. ZachXBT, Lookonchain, etc.)
 - Notable community discussions, memes-with-substance, or sentiment shifts
 - Exchange listing or delisting news from credible sources
 
 WHAT TO IGNORE:
 - Posts from the project's own official X account
-- Pure price predictions with no analysis ("about to go vertical")
+- ALL price predictions and price targets, even with charts or technical analysis. These are NOT news.
 - Engagement farming ("buy more!", emoji-heavy hype posts with no substance)
 - Random influencers just listing the ticker among 10 other coins
 
